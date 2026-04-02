@@ -1,6 +1,14 @@
 {
+  "name": "veje-garden",
+  "scripts": {
+    "tailwind": "npx @tailwindcss/cli -i ./input.css -o ./veje-garden-theme/assets/style.css --watch",
+    "shopify": "shopify theme dev --path ./veje-garden-theme"
+  },
   "dependencies": {
     "@tailwindcss/cli": "^4.2.2",
     "tailwindcss": "^4.2.2"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }
