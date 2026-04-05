@@ -270,6 +270,12 @@
   .tw\:p-10 {
     padding: calc(var(--tw-spacing) * 10);
   }
+  .tw\:py-2\.5 {
+    padding-block: calc(var(--tw-spacing) * 2.5);
+  }
+  .tw\:py-2\.5\! {
+    padding-block: calc(var(--tw-spacing) * 2.5) !important;
+  }
   .tw\:text-center {
     text-align: center;
   }
