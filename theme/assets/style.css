@@ -1,4 +1,5 @@
 /*! tailwindcss v4.2.2 | MIT License | https://tailwindcss.com */
+@layer properties;
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
@@ -7,14 +8,23 @@
     --tw-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --tw-color-amber-600: oklch(66.6% 0.179 58.318);
+    --tw-color-white: #fff;
     --tw-spacing: 0.25rem;
     --tw-text-base: 1rem;
     --tw-text-base--line-height: calc(1.5 / 1);
+    --tw-text-lg: 1.125rem;
+    --tw-text-lg--line-height: calc(1.75 / 1.125);
+    --tw-text-xl: 1.25rem;
+    --tw-text-xl--line-height: calc(1.75 / 1.25);
     --tw-text-6xl: 3.75rem;
     --tw-text-6xl--line-height: 1;
     --tw-text-9xl: 8rem;
     --tw-text-9xl--line-height: 1;
+    --tw-font-weight-medium: 500;
+    --tw-font-weight-semibold: 600;
     --tw-radius-lg: 0.5rem;
+    --tw-radius-3xl: 1.5rem;
+    --tw-radius-4xl: 2rem;
     --tw-default-font-family: var(--tw-font-sans);
     --tw-default-mono-font-family: var(--tw-font-mono);
   }
@@ -186,23 +196,8 @@
   .tw\:hidden {
     display: none;
   }
-  .tw\:h-31 {
-    height: calc(var(--tw-spacing) * 31);
-  }
-  .tw\:h-120 {
-    height: calc(var(--tw-spacing) * 120);
-  }
-  .tw\:h-140 {
-    height: calc(var(--tw-spacing) * 140);
-  }
-  .tw\:h-150 {
-    height: calc(var(--tw-spacing) * 150);
-  }
   .tw\:h-160 {
     height: calc(var(--tw-spacing) * 160);
-  }
-  .tw\:h-full {
-    height: 100%;
   }
   .tw\:h-full\! {
     height: 100% !important;
@@ -213,26 +208,14 @@
   .tw\:w-full\! {
     width: 100% !important;
   }
-  .tw\:max-w-127 {
-    max-width: calc(var(--tw-spacing) * 127);
-  }
   .tw\:max-w-130 {
     max-width: calc(var(--tw-spacing) * 130);
-  }
-  .tw\:max-w-\[445px\] {
-    max-width: 445px;
-  }
-  .tw\:max-w-\[510px\] {
-    max-width: 510px;
   }
   .tw\:max-w-full {
     max-width: 100%;
   }
   .tw\:flex-col {
     flex-direction: column;
-  }
-  .tw\:items-center {
-    align-items: center;
   }
   .tw\:items-start {
     align-items: flex-start;
@@ -249,6 +232,9 @@
   .tw\:overflow-hidden {
     overflow: hidden;
   }
+  .tw\:rounded-3xl\! {
+    border-radius: var(--tw-radius-3xl) !important;
+  }
   .tw\:rounded-lg {
     border-radius: var(--tw-radius-lg);
   }
@@ -258,49 +244,37 @@
   .tw\:object-bottom {
     object-position: bottom;
   }
-  .tw\:object-bottom-left {
-    object-position: left bottom;
-  }
-  .tw\:object-bottom-right {
-    object-position: right bottom;
-  }
-  .tw\:p-4 {
-    padding: calc(var(--tw-spacing) * 4);
-  }
   .tw\:p-10 {
     padding: calc(var(--tw-spacing) * 10);
   }
-  .tw\:py-2\.5 {
-    padding-block: calc(var(--tw-spacing) * 2.5);
+  .tw\:px-8\! {
+    padding-inline: calc(var(--tw-spacing) * 8) !important;
   }
   .tw\:py-2\.5\! {
     padding-block: calc(var(--tw-spacing) * 2.5) !important;
-  }
-  .tw\:text-center {
-    text-align: center;
-  }
-  .tw\:text-6xl {
-    font-size: var(--tw-text-6xl);
-    line-height: var(--tw-leading, var(--tw-text-6xl--line-height));
   }
   .tw\:text-6xl\! {
     font-size: var(--tw-text-6xl) !important;
     line-height: var(--tw-leading, var(--tw-text-6xl--line-height)) !important;
   }
-  .tw\:text-9xl {
-    font-size: var(--tw-text-9xl);
-    line-height: var(--tw-leading, var(--tw-text-9xl--line-height));
-  }
-  .tw\:text-base {
-    font-size: var(--tw-text-base);
-    line-height: var(--tw-leading, var(--tw-text-base--line-height));
-  }
   .tw\:text-base\! {
     font-size: var(--tw-text-base) !important;
     line-height: var(--tw-leading, var(--tw-text-base--line-height)) !important;
   }
-  .tw\:text-amber-600 {
-    color: var(--tw-color-amber-600);
+  .tw\:text-lg\! {
+    font-size: var(--tw-text-lg) !important;
+    line-height: var(--tw-leading, var(--tw-text-lg--line-height)) !important;
+  }
+  .tw\:font-medium\! {
+    --tw-font-weight: var(--tw-font-weight-medium) !important;
+    font-weight: var(--tw-font-weight-medium) !important;
+  }
+  .tw\:hover\:text-white\! {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--tw-color-white) !important;
+      }
+    }
   }
   .tw\:md\:block {
     @media (width >= 48rem) {
@@ -310,6 +284,17 @@
   .tw\:md\:hidden {
     @media (width >= 48rem) {
       display: none;
+    }
+  }
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@layer properties {
+  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+    *, ::before, ::after, ::backdrop {
+      --tw-font-weight: initial;
     }
   }
 }
