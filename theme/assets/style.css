@@ -162,6 +162,12 @@
   }
 }
 @layer utilities {
+  .tw\:w-full {
+    width: 100%;
+  }
+  .tw\:max-w-full {
+    max-width: 100%;
+  }
   .tw\:text-9xl {
     font-size: var(--tw-text-9xl);
     line-height: var(--tw-leading, var(--tw-text-9xl--line-height));
