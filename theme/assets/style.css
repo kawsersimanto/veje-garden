@@ -15,6 +15,10 @@
     --tw-text-lg--line-height: calc(1.75 / 1.125);
     --tw-text-3xl: 1.875rem;
     --tw-text-3xl--line-height: calc(2.25 / 1.875);
+    --tw-text-4xl: 2.25rem;
+    --tw-text-4xl--line-height: calc(2.5 / 2.25);
+    --tw-text-5xl: 3rem;
+    --tw-text-5xl--line-height: 1;
     --tw-text-6xl: 3.75rem;
     --tw-text-6xl--line-height: 1;
     --tw-font-weight-medium: 500;
@@ -185,11 +189,20 @@
   .tw\:block {
     display: block;
   }
+  .tw\:block\! {
+    display: block !important;
+  }
   .tw\:flex {
     display: flex;
   }
   .tw\:hidden {
     display: none;
+  }
+  .tw\:h-120 {
+    height: calc(var(--tw-spacing) * 120);
+  }
+  .tw\:h-140 {
+    height: calc(var(--tw-spacing) * 140);
   }
   .tw\:h-160 {
     height: calc(var(--tw-spacing) * 160);
@@ -206,6 +219,9 @@
   .tw\:max-w-130 {
     max-width: calc(var(--tw-spacing) * 130);
   }
+  .tw\:max-w-140 {
+    max-width: calc(var(--tw-spacing) * 140);
+  }
   .tw\:max-w-full {
     max-width: 100%;
   }
@@ -217,6 +233,9 @@
   }
   .tw\:justify-center {
     justify-content: center;
+  }
+  .tw\:justify-start {
+    justify-content: flex-start;
   }
   .tw\:gap-4 {
     gap: calc(var(--tw-spacing) * 4);
@@ -239,6 +258,9 @@
   .tw\:object-bottom {
     object-position: bottom;
   }
+  .tw\:p-5 {
+    padding: calc(var(--tw-spacing) * 5);
+  }
   .tw\:p-10 {
     padding: calc(var(--tw-spacing) * 10);
   }
@@ -248,9 +270,26 @@
   .tw\:py-2\.5\! {
     padding-block: calc(var(--tw-spacing) * 2.5) !important;
   }
+  .tw\:py-10 {
+    padding-block: calc(var(--tw-spacing) * 10);
+  }
+  .tw\:ps-5 {
+    padding-inline-start: calc(var(--tw-spacing) * 5);
+  }
+  .tw\:pe-5 {
+    padding-inline-end: calc(var(--tw-spacing) * 5);
+  }
   .tw\:text-3xl {
     font-size: var(--tw-text-3xl);
     line-height: var(--tw-leading, var(--tw-text-3xl--line-height));
+  }
+  .tw\:text-4xl {
+    font-size: var(--tw-text-4xl);
+    line-height: var(--tw-leading, var(--tw-text-4xl--line-height));
+  }
+  .tw\:text-5xl {
+    font-size: var(--tw-text-5xl);
+    line-height: var(--tw-leading, var(--tw-text-5xl--line-height));
   }
   .tw\:text-base\! {
     font-size: var(--tw-text-base) !important;
@@ -276,9 +315,34 @@
       display: block;
     }
   }
+  .tw\:md\:grid {
+    @media (width >= 48rem) {
+      display: grid;
+    }
+  }
+  .tw\:md\:grid\! {
+    @media (width >= 48rem) {
+      display: grid !important;
+    }
+  }
   .tw\:md\:hidden {
     @media (width >= 48rem) {
       display: none;
+    }
+  }
+  .tw\:md\:h-160 {
+    @media (width >= 48rem) {
+      height: calc(var(--tw-spacing) * 160);
+    }
+  }
+  .tw\:md\:justify-center {
+    @media (width >= 48rem) {
+      justify-content: center;
+    }
+  }
+  .tw\:md\:p-10 {
+    @media (width >= 48rem) {
+      padding: calc(var(--tw-spacing) * 10);
     }
   }
   .tw\:md\:text-6xl\! {

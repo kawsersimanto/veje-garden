@@ -3,18 +3,16 @@
   defer
 ></script>
 
-<div
-  class="section section--page-width"
->
+<div class="section section--page-width tw:md:grid! tw:block!">
   <div class="banner-row">
     <div class="swiper banner-collection tw:w-full tw:max-w-full">
       <div class="swiper-wrapper">
         {% if section.blocks.size > 0 %}
           {% for block in section.blocks %}
-            <div class="swiper-slide">
+            <div class="swiper-slide" {{ block.shopify_attributes }} data-index="{{ forloop.index0 }}">
               <a
-                href="{{ block.settings.link }}"
-                class="tw:rounded-lg tw:overflow-hidden tw:block tw:relative tw:h-160"
+                href="{{ block.settings.link | default: '/collections/all' }}"
+                class="tw:rounded-lg tw:overflow-hidden tw:block tw:relative tw:md:h-160 tw:h-140"
               >
                 {% if block.settings.image %}
                   <img
@@ -24,20 +22,19 @@
                     alt="{{ block.settings.banner_title | strip_html }}"
                     class="tw:w-full! tw:h-full! tw:object-cover tw:object-bottom tw:hidden tw:md:block"
                   >
-                {% endif %}
-
-                {% if block.settings.mobile_image %}
+                {% else %}
                   <img
-                    src="{{ block.settings.mobile_image | image_url: width: 2000 }}"
+                    src="{{ 'banner.webp' | asset_url }}"
                     width="2000"
                     height="2000"
                     alt="{{ block.settings.banner_title | strip_html }}"
-                    class="tw:w-full! tw:h-full! tw:object-cover tw:object-bottom tw:block tw:md:hidden"
+                    class="tw:w-full! tw:h-full! tw:object-cover tw:object-bottom tw:hidden tw:md:block"
                   >
                 {% endif %}
-                <div class="tw:absolute tw:inset-0 tw:p-10 tw:flex tw:flex-col tw:items-start tw:justify-center tw:max-w-130 tw:gap-8">
+
+                <div class="tw:absolute tw:inset-0 tw:md:p-10 tw:ps-5 tw:pe-5 tw:py-10 tw:flex tw:flex-col tw:items-start tw:md:justify-center tw:justify-start tw:max-w-140 tw:gap-8">
                   <div class="tw:flex tw:flex-col tw:gap-4">
-                    <div class="tw:md:text-6xl! tw:text-3xl">{{ block.settings.banner_title }}</div>
+                    <div class="tw:md:text-6xl! tw:text-5xl">{{ block.settings.banner_title }}</div>
                     <p class="tw:text-base!">{{ block.settings.banner_description | strip_html }}</p>
                   </div>
                   <div class="button tw:py-2.5! tw:px-8! tw:rounded-3xl! tw:hover:text-white! tw:text-lg! tw:font-medium!">
@@ -52,20 +49,6 @@
     </div>
   </div>
 </div>
-
-{% comment %}
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const bannerSlider = new Swiper('.banner-collection', {
-        slidesPerView: 1,
-        effect: 'fade',
-        fadeEffect: {
-          crossFade: true,
-        },
-      });
-    });
-  </script>
-{% endcomment %}
 
 {% schema %}
 {
@@ -84,19 +67,16 @@
           "label": "Banner Image"
         },
         {
-          "type": "image_picker",
-          "id": "mobile_image",
-          "label": "Mobile Banner Image"
-        },
-        {
           "type": "richtext",
           "id": "banner_title",
-          "label": "Banner Title"
+          "label": "Banner Title",
+          "default": "<p>Banner Title</p>"
         },
         {
           "type": "richtext",
           "id": "banner_description",
-          "label": "Banner Description"
+          "label": "Banner Description",
+          "default": "<p>Add a compelling description for your banner here.</p>"
         },
         {
           "type": "url",
@@ -106,7 +86,8 @@
         {
           "type": "text",
           "id": "banner_button_text",
-          "label": "Banner Button Text"
+          "label": "Banner Button Text",
+          "default": "Shop Now"
         }
       ]
     }
