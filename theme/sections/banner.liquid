@@ -49,12 +49,14 @@
 </div>
 
 <script>
-  const bannerSlider = new Swiper('.banner-collection', {
-    slidesPerView: 1,
-    effect: 'fade',
-    fadeEffect: {
-      crossFade: true,
-    },
+  document.addEventListener('DOMContentLoaded', function () {
+    const bannerSlider = new Swiper('.banner-collection', {
+      slidesPerView: 1,
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true,
+      },
+    });
   });
 </script>
 

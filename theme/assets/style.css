@@ -252,10 +252,6 @@
     font-size: var(--tw-text-3xl);
     line-height: var(--tw-leading, var(--tw-text-3xl--line-height));
   }
-  .tw\:text-6xl\! {
-    font-size: var(--tw-text-6xl) !important;
-    line-height: var(--tw-leading, var(--tw-text-6xl--line-height)) !important;
-  }
   .tw\:text-base\! {
     font-size: var(--tw-text-base) !important;
     line-height: var(--tw-leading, var(--tw-text-base--line-height)) !important;
