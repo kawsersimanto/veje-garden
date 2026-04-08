@@ -7,24 +7,19 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --tw-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --tw-color-amber-600: oklch(66.6% 0.179 58.318);
     --tw-color-white: #fff;
     --tw-spacing: 0.25rem;
     --tw-text-base: 1rem;
     --tw-text-base--line-height: calc(1.5 / 1);
     --tw-text-lg: 1.125rem;
     --tw-text-lg--line-height: calc(1.75 / 1.125);
-    --tw-text-xl: 1.25rem;
-    --tw-text-xl--line-height: calc(1.75 / 1.25);
+    --tw-text-3xl: 1.875rem;
+    --tw-text-3xl--line-height: calc(2.25 / 1.875);
     --tw-text-6xl: 3.75rem;
     --tw-text-6xl--line-height: 1;
-    --tw-text-9xl: 8rem;
-    --tw-text-9xl--line-height: 1;
     --tw-font-weight-medium: 500;
-    --tw-font-weight-semibold: 600;
     --tw-radius-lg: 0.5rem;
     --tw-radius-3xl: 1.5rem;
-    --tw-radius-4xl: 2rem;
     --tw-default-font-family: var(--tw-font-sans);
     --tw-default-mono-font-family: var(--tw-font-mono);
   }
@@ -253,6 +248,10 @@
   .tw\:py-2\.5\! {
     padding-block: calc(var(--tw-spacing) * 2.5) !important;
   }
+  .tw\:text-3xl {
+    font-size: var(--tw-text-3xl);
+    line-height: var(--tw-leading, var(--tw-text-3xl--line-height));
+  }
   .tw\:text-6xl\! {
     font-size: var(--tw-text-6xl) !important;
     line-height: var(--tw-leading, var(--tw-text-6xl--line-height)) !important;
@@ -284,6 +283,12 @@
   .tw\:md\:hidden {
     @media (width >= 48rem) {
       display: none;
+    }
+  }
+  .tw\:md\:text-6xl\! {
+    @media (width >= 48rem) {
+      font-size: var(--tw-text-6xl) !important;
+      line-height: var(--tw-leading, var(--tw-text-6xl--line-height)) !important;
     }
   }
 }
