@@ -22,6 +22,7 @@
     --tw-text-6xl: 3.75rem;
     --tw-text-6xl--line-height: 1;
     --tw-font-weight-medium: 500;
+    --tw-font-weight-semibold: 600;
     --tw-radius-lg: 0.5rem;
     --tw-radius-3xl: 1.5rem;
     --tw-default-font-family: var(--tw-font-sans);
@@ -210,6 +211,12 @@
   .tw\:h-full\! {
     height: 100% !important;
   }
+  .tw\:w-8 {
+    width: calc(var(--tw-spacing) * 8);
+  }
+  .tw\:w-8\! {
+    width: calc(var(--tw-spacing) * 8) !important;
+  }
   .tw\:w-full {
     width: 100%;
   }
@@ -225,8 +232,14 @@
   .tw\:max-w-full {
     max-width: 100%;
   }
+  .tw\:shrink-0 {
+    flex-shrink: 0;
+  }
   .tw\:flex-col {
     flex-direction: column;
+  }
+  .tw\:items-center {
+    align-items: center;
   }
   .tw\:items-start {
     align-items: flex-start;
@@ -236,6 +249,15 @@
   }
   .tw\:justify-start {
     justify-content: flex-start;
+  }
+  .tw\:gap-2 {
+    gap: calc(var(--tw-spacing) * 2);
+  }
+  .tw\:gap-2\! {
+    gap: calc(var(--tw-spacing) * 2) !important;
+  }
+  .tw\:gap-3 {
+    gap: calc(var(--tw-spacing) * 3);
   }
   .tw\:gap-4 {
     gap: calc(var(--tw-spacing) * 4);
@@ -295,13 +317,28 @@
     font-size: var(--tw-text-base) !important;
     line-height: var(--tw-leading, var(--tw-text-base--line-height)) !important;
   }
+  .tw\:text-lg {
+    font-size: var(--tw-text-lg);
+    line-height: var(--tw-leading, var(--tw-text-lg--line-height));
+  }
   .tw\:text-lg\! {
     font-size: var(--tw-text-lg) !important;
     line-height: var(--tw-leading, var(--tw-text-lg--line-height)) !important;
   }
+  .tw\:font-medium {
+    --tw-font-weight: var(--tw-font-weight-medium);
+    font-weight: var(--tw-font-weight-medium);
+  }
   .tw\:font-medium\! {
     --tw-font-weight: var(--tw-font-weight-medium) !important;
     font-weight: var(--tw-font-weight-medium) !important;
+  }
+  .tw\:font-semibold {
+    --tw-font-weight: var(--tw-font-weight-semibold);
+    font-weight: var(--tw-font-weight-semibold);
+  }
+  .tw\:uppercase {
+    text-transform: uppercase;
   }
   .tw\:hover\:text-white\! {
     &:hover {

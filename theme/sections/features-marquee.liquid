@@ -1,0 +1,198 @@
+<script
+  src="{{ 'marquee.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+{% assign gap_between_elements = section.settings.gap_between_elements %}
+
+<div class="section section--page-width tw:md:grid! tw:block!">
+  <div class="tw:flex tw:items-center tw:gap-8">
+    <p class="tw:font-semibold tw:shrink-0 tw:uppercase tw:text-lg">Why US</p>
+    <marquee-component
+      class="section spacing-style gap-style color-{{ section.settings.color_scheme }}"
+      data-speed-factor="25"
+      style="
+        {%- render 'spacing-style', settings: section.settings %};
+        {% render 'gap-style', value: gap_between_elements, name: 'marquee-gap' %}
+        --marquee-direction: {{ section.settings.movement_direction }};
+      "
+      data-movement-direction="{{ section.settings.movement_direction }}"
+    >
+      <div class="marquee__wrapper" ref="wrapper">
+        <div class="marquee__content" ref="content">
+          {% for block in section.blocks %}
+            <div class="marquee__repeated-items" ref="marqueeItems[]" {{ block.shopify_attributes }}>
+              <div class="flex tw:items-center tw:justify-center">
+                {% if block.settings.image %}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 32 }}"
+                    width="32"
+                    height="32"
+                    alt="{{ block.settings.image.alt }}"
+                    class="tw:shrink-0 tw:w-8!"
+                  >
+                {% else %}
+                  <img
+                    src="{{ 'feature.svg' | asset_url }}"
+                    width="32"
+                    height="32"
+                    alt="Image"
+                    class="tw:shrink-0 tw:w-8!"
+                  >
+                {% endif %}
+                <p class="tw:text-base! tw:uppercase tw:font-semibold">{{ block.settings.text }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </marquee-component>
+  </div>
+</div>
+
+{% stylesheet %}
+  marquee-component {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .marquee__wrapper {
+    display: flex;
+    gap: var(--marquee-gap);
+    width: fit-content;
+    white-space: nowrap;
+  }
+
+  .marquee__content {
+    min-width: max-content;
+    display: flex;
+    gap: var(--marquee-gap);
+  }
+
+  .marquee__content :is(p, h1, h2, h3, h4, h5, h6) {
+    white-space: nowrap;
+  }
+
+  .marquee__content .marquee__repeated-items * {
+    max-width: none;
+  }
+
+  .marquee__repeated-items {
+    min-width: max-content;
+    display: flex;
+    gap: var(--marquee-gap);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .marquee__repeated-items > * {
+    align-content: center;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    marquee-component:not([data-disabled]) .marquee__wrapper {
+      animation: marquee-motion var(--marquee-speed) linear infinite var(--marquee-direction);
+    }
+  }
+
+  @keyframes marquee-motion {
+    to {
+      transform: translate3d(calc(-50% - (var(--marquee-gap) / 2)), 0, 0);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Features Marquee",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "movement_direction",
+      "label": "t:settings.motion_direction",
+      "options": [
+        {
+          "value": "reverse",
+          "label": "t:options.forward"
+        },
+        {
+          "value": "normal",
+          "label": "t:options.reverse"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "gap_between_elements",
+      "label": "t:settings.gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Marquee Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Feature"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features Marquee",
+      "blocks": [{ "type": "item" }, { "type": "item" }, { "type": "item" }, { "type": "item" }]
+    }
+  ]
+}
+{% endschema %}
