@@ -40,6 +40,53 @@
       "name": "Banner Slider",
       "settings": {}
     },
+    "features_marquee_7pg9Kt": {
+      "type": "features-marquee",
+      "blocks": {
+        "item_P4hTHA": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Group_5.svg",
+            "text": "OB/GYN Developed"
+          }
+        },
+        "item_xEQJGg": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Group_6_2.svg",
+            "text": "Clinically Studied"
+          }
+        },
+        "item_PCX3hp": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Group_13.svg",
+            "text": "No Sugar"
+          }
+        },
+        "item_6yE8XR": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Group_14.svg",
+            "text": "Traceable Ingridients"
+          }
+        }
+      },
+      "block_order": [
+        "item_P4hTHA",
+        "item_xEQJGg",
+        "item_PCX3hp",
+        "item_6yE8XR"
+      ],
+      "name": "Features Marquee",
+      "settings": {
+        "movement_direction": "normal",
+        "color_scheme": "",
+        "padding-block-start": 24,
+        "padding-block-end": 24,
+        "gap_between_elements": 24
+      }
+    },
     "product_list_fa6P9H": {
       "type": "product-list",
       "blocks": {
@@ -237,6 +284,7 @@
   },
   "order": [
     "banner_CiCGyQ",
+    "features_marquee_7pg9Kt",
     "product_list_fa6P9H"
   ]
 }

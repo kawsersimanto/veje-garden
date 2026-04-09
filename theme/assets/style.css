@@ -199,20 +199,11 @@
   .tw\:hidden {
     display: none;
   }
-  .tw\:h-120 {
-    height: calc(var(--tw-spacing) * 120);
-  }
   .tw\:h-140 {
     height: calc(var(--tw-spacing) * 140);
   }
-  .tw\:h-160 {
-    height: calc(var(--tw-spacing) * 160);
-  }
   .tw\:h-full\! {
     height: 100% !important;
-  }
-  .tw\:w-8 {
-    width: calc(var(--tw-spacing) * 8);
   }
   .tw\:w-8\! {
     width: calc(var(--tw-spacing) * 8) !important;
@@ -222,9 +213,6 @@
   }
   .tw\:w-full\! {
     width: 100% !important;
-  }
-  .tw\:max-w-130 {
-    max-width: calc(var(--tw-spacing) * 130);
   }
   .tw\:max-w-140 {
     max-width: calc(var(--tw-spacing) * 140);
@@ -250,15 +238,6 @@
   .tw\:justify-start {
     justify-content: flex-start;
   }
-  .tw\:gap-2 {
-    gap: calc(var(--tw-spacing) * 2);
-  }
-  .tw\:gap-2\! {
-    gap: calc(var(--tw-spacing) * 2) !important;
-  }
-  .tw\:gap-3 {
-    gap: calc(var(--tw-spacing) * 3);
-  }
   .tw\:gap-4 {
     gap: calc(var(--tw-spacing) * 4);
   }
@@ -280,12 +259,6 @@
   .tw\:object-bottom {
     object-position: bottom;
   }
-  .tw\:p-5 {
-    padding: calc(var(--tw-spacing) * 5);
-  }
-  .tw\:p-10 {
-    padding: calc(var(--tw-spacing) * 10);
-  }
   .tw\:px-8\! {
     padding-inline: calc(var(--tw-spacing) * 8) !important;
   }
@@ -300,14 +273,6 @@
   }
   .tw\:pe-5 {
     padding-inline-end: calc(var(--tw-spacing) * 5);
-  }
-  .tw\:text-3xl {
-    font-size: var(--tw-text-3xl);
-    line-height: var(--tw-leading, var(--tw-text-3xl--line-height));
-  }
-  .tw\:text-4xl {
-    font-size: var(--tw-text-4xl);
-    line-height: var(--tw-leading, var(--tw-text-4xl--line-height));
   }
   .tw\:text-5xl {
     font-size: var(--tw-text-5xl);
@@ -324,10 +289,6 @@
   .tw\:text-lg\! {
     font-size: var(--tw-text-lg) !important;
     line-height: var(--tw-leading, var(--tw-text-lg--line-height)) !important;
-  }
-  .tw\:font-medium {
-    --tw-font-weight: var(--tw-font-weight-medium);
-    font-weight: var(--tw-font-weight-medium);
   }
   .tw\:font-medium\! {
     --tw-font-weight: var(--tw-font-weight-medium) !important;
@@ -352,19 +313,9 @@
       display: block;
     }
   }
-  .tw\:md\:grid {
-    @media (width >= 48rem) {
-      display: grid;
-    }
-  }
   .tw\:md\:grid\! {
     @media (width >= 48rem) {
       display: grid !important;
-    }
-  }
-  .tw\:md\:hidden {
-    @media (width >= 48rem) {
-      display: none;
     }
   }
   .tw\:md\:h-160 {
