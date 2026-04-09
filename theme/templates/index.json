@@ -80,11 +80,14 @@
       ],
       "name": "Features Marquee",
       "settings": {
+        "feature_title": "Why us?",
         "movement_direction": "normal",
         "color_scheme": "",
         "padding-block-start": 24,
         "padding-block-end": 24,
-        "gap_between_elements": 24
+        "gap_between_elements": 24,
+        "mobile-padding-block-start": 0,
+        "mobile-padding-block-end": 0
       }
     },
     "product_list_fa6P9H": {
