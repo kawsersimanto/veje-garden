@@ -6,9 +6,9 @@
 
 {% assign gap_between_elements = section.settings.gap_between_elements %}
 
-<div class="section section--page-width">
-  <div class="tw:flex tw:items-center tw:gap-8">
-    <p class="tw:font-semibold tw:shrink-0 tw:uppercase tw:text-lg">Why US</p>
+<div class="section section--page-width tw:md:py-0 tw:py-6">
+  <div class="tw:flex tw:md:flex-row tw:flex-col tw:items-center tw:md:gap-8 tw:gap-6">
+    <p class="tw:font-semibold tw:shrink-0 tw:uppercase tw:text-lg">{{ section.settings.feature_title }}</p>
     <marquee-component
       class="section spacing-style gap-style color-{{ section.settings.color_scheme }}"
       data-speed-factor="25"
@@ -16,6 +16,10 @@
         {%- render 'spacing-style', settings: section.settings %};
         {% render 'gap-style', value: gap_between_elements, name: 'marquee-gap' %}
         --marquee-direction: {{ section.settings.movement_direction }};
+        --padding-block-start: {{ section.settings["padding-block-start"] }}px;
+        --padding-block-end: {{ section.settings["padding-block-end"] }}px;
+        --mobile-padding-block-start: {{ section.settings["mobile-padding-block-start"] }}px;
+        --mobile-padding-block-end: {{ section.settings["mobile-padding-block-end"] }}px;
       "
       data-movement-direction="{{ section.settings.movement_direction }}"
     >
@@ -91,6 +95,20 @@
     align-content: center;
   }
 
+  @media (max-width: 767px) {
+    marquee-component {
+      padding-block-start: var(--mobile-padding-block-start) !important;
+      padding-block-end: var(--mobile-padding-block-end) !important;
+    }
+  }
+
+  @media (min-width: 768px) {
+    marquee-component {
+      padding-block-start: var(--padding-block-start) !important;
+      padding-block-end: var(--padding-block-end) !important;
+    }
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     marquee-component:not([data-disabled]) .marquee__wrapper {
       animation: marquee-motion var(--marquee-speed) linear infinite var(--marquee-direction);
@@ -112,6 +130,13 @@
     "groups": ["header", "footer"]
   },
   "settings": [
+    {
+      "type": "text",
+      "id": "feature_title",
+      "label": "Section Title",
+      "default": "Why Choose us?",
+      "placeholder": "Why Choose us?"
+    },
     {
       "type": "select",
       "id": "movement_direction",
@@ -167,6 +192,30 @@
       "step": 1,
       "unit": "px",
       "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Mobile padding"
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-block-start",
+      "label": "Mobile top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-block-end",
+      "label": "Mobile bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 16
     }
   ],
   "blocks": [

@@ -187,6 +187,24 @@
   .tw\:inset-0 {
     inset: calc(var(--tw-spacing) * 0);
   }
+  .tw\:top-0 {
+    top: calc(var(--tw-spacing) * 0);
+  }
+  .tw\:bottom-0 {
+    bottom: calc(var(--tw-spacing) * 0);
+  }
+  .tw\:left-0 {
+    left: calc(var(--tw-spacing) * 0);
+  }
+  .tw\:isolate {
+    isolation: isolate;
+  }
+  .tw\:z-1 {
+    z-index: 1;
+  }
+  .tw\:z-2 {
+    z-index: 2;
+  }
   .tw\:block {
     display: block;
   }
@@ -202,8 +220,14 @@
   .tw\:h-140 {
     height: calc(var(--tw-spacing) * 140);
   }
+  .tw\:h-full {
+    height: 100%;
+  }
   .tw\:h-full\! {
     height: 100% !important;
+  }
+  .tw\:w-1\/12 {
+    width: calc(1 / 12 * 100%);
   }
   .tw\:w-8\! {
     width: calc(var(--tw-spacing) * 8) !important;
@@ -241,6 +265,9 @@
   .tw\:gap-4 {
     gap: calc(var(--tw-spacing) * 4);
   }
+  .tw\:gap-6 {
+    gap: calc(var(--tw-spacing) * 6);
+  }
   .tw\:gap-8 {
     gap: calc(var(--tw-spacing) * 8);
   }
@@ -253,6 +280,9 @@
   .tw\:rounded-lg {
     border-radius: var(--tw-radius-lg);
   }
+  .tw\:bg-white {
+    background-color: var(--tw-color-white);
+  }
   .tw\:object-cover {
     object-fit: cover;
   }
@@ -264,6 +294,9 @@
   }
   .tw\:py-2\.5\! {
     padding-block: calc(var(--tw-spacing) * 2.5) !important;
+  }
+  .tw\:py-6 {
+    padding-block: calc(var(--tw-spacing) * 6);
   }
   .tw\:py-10 {
     padding-block: calc(var(--tw-spacing) * 10);
@@ -323,9 +356,19 @@
       height: calc(var(--tw-spacing) * 160);
     }
   }
+  .tw\:md\:flex-row {
+    @media (width >= 48rem) {
+      flex-direction: row;
+    }
+  }
   .tw\:md\:justify-center {
     @media (width >= 48rem) {
       justify-content: center;
+    }
+  }
+  .tw\:md\:gap-8 {
+    @media (width >= 48rem) {
+      gap: calc(var(--tw-spacing) * 8);
     }
   }
   .tw\:md\:rounded-lg {
@@ -336,6 +379,11 @@
   .tw\:md\:p-10 {
     @media (width >= 48rem) {
       padding: calc(var(--tw-spacing) * 10);
+    }
+  }
+  .tw\:md\:py-0 {
+    @media (width >= 48rem) {
+      padding-block: calc(var(--tw-spacing) * 0);
     }
   }
   .tw\:md\:text-6xl\! {
