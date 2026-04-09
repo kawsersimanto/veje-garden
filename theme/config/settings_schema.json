@@ -376,6 +376,12 @@
         "label": "t:options.accent"
       },
       {
+        "type": "font_picker",
+        "id": "type_italic_font",
+        "label": "Italic font",
+        "default": "playfair_display_n4"
+      },
+      {
         "type": "header",
         "content": "t:content.text_presets"
       },

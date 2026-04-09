@@ -25,6 +25,17 @@
       >
     {% endif %}
 
+    {% if settings.type_italic_font != blank %}
+      <style>
+        :root {
+          --font-italic: {{ settings.type_italic_font.family }}, serif;
+        }
+        em {
+          font-family: var(--font-italic);
+        }
+      </style>
+    {% endif %}
+
     {%- render 'meta-tags' -%}
     {%- render 'stylesheets' -%}
     {%- render 'fonts' -%}
