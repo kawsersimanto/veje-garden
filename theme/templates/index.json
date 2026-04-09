@@ -101,7 +101,6 @@
           "veje-favorites-1",
           "rooted-seeded-planted",
           "gummies",
-          "launch-collection",
           "beautiful-skin-bundle"
         ],
         "image_height": 400,
@@ -109,7 +108,7 @@
         "heading": "<h2>Simple solutions for <em>every need</em></h2>",
         "description": "<p>Discover our latest products.</p>",
         "button_label": "Shop Collection",
-        "button_url": ""
+        "button_url": "shopify://collections/all"
       }
     },
     "product_list_fa6P9H": {
