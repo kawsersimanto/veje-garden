@@ -328,6 +328,11 @@
       justify-content: center;
     }
   }
+  .tw\:md\:rounded-lg {
+    @media (width >= 48rem) {
+      border-radius: var(--tw-radius-lg);
+    }
+  }
   .tw\:md\:p-10 {
     @media (width >= 48rem) {
       padding: calc(var(--tw-spacing) * 10);
