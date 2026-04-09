@@ -90,6 +90,28 @@
         "mobile-padding-block-end": 0
       }
     },
+    "collection_slider_LEKKee": {
+      "type": "collection-slider",
+      "name": "Product Collection Slider",
+      "settings": {
+        "collections": [
+          "mens-health",
+          "age-well-bundle",
+          "capsules",
+          "veje-favorites-1",
+          "rooted-seeded-planted",
+          "gummies",
+          "launch-collection",
+          "beautiful-skin-bundle"
+        ],
+        "image_height": 400,
+        "mobile_image_height": 250,
+        "heading": "<h2>Simple solutions for <em>every need</em></h2>",
+        "description": "<p>Discover our latest products.</p>",
+        "button_label": "Shop Collection",
+        "button_url": ""
+      }
+    },
     "product_list_fa6P9H": {
       "type": "product-list",
       "blocks": {
@@ -288,6 +310,7 @@
   "order": [
     "banner_CiCGyQ",
     "features_marquee_7pg9Kt",
+    "collection_slider_LEKKee",
     "product_list_fa6P9H"
   ]
 }
