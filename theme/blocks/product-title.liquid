@@ -1,15 +1,30 @@
-
+{% assign fw_style = '' %}
+{% if block.settings.type_preset == 'custom' %}
+  {% assign fw_style = 'font-weight:' | append: block.settings.font_weight | append: ';' %}
+{% endif %}
 
 {% if closest.product == blank %}
   {% assign text = 'placeholders.product_title' | t %}
-  {% assign product_title = '<p role="heading" aria-level="3">' | append: text | append: '</p>' %}
+  {% assign product_title = '<p role="heading" aria-level="3" style="'
+    | append: fw_style
+    | append: '">'
+    | append: text
+    | append: '</p>'
+  %}
   {% render 'text', fallback_text: product_title, block: block %}
 {% else %}
-  {% assign product_title = '<p role="heading" aria-level="3">' | append: closest.product.title | append: '</p>' %}
+  {% assign product_title = '<p role="heading" aria-level="3" style="'
+    | append: fw_style
+    | append: '">'
+    | append: closest.product.title
+    | append: '</p>'
+  %}
+
   <a
     class="contents user-select-text"
     ref="productTitleLink"
     href="{{ closest.product.selected_or_first_available_variant.url }}"
+    style="{{ fw_style }}"
   >
     {% render 'text', fallback_text: product_title, block: block %}
   </a>
@@ -220,6 +235,30 @@
         }
       ],
       "default": "1rem",
+      "visible_if": "{{ block.settings.type_preset == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font Weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "400"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" },
+        { "value": "900", "label": "900" }
+      ],
+      "default": "400",
       "visible_if": "{{ block.settings.type_preset == 'custom' }}"
     },
     {
