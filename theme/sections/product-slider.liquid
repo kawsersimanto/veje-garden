@@ -1,0 +1,170 @@
+<div class="section section--page-width tw:md:pb-12 tw:md:pt-15 tw:py-8 tw:overflow-hidden">
+  <div class="tw:flex tw:flex-col tw:md:gap-8 tw:gap-8">
+    <div class="tw:grid tw:md:grid-cols-2 tw:grid-cols-1 tw:gap-6">
+      <div class="tw:flex tw:flex-col tw:gap-2">
+        <div class="tw:text-3xl! tw:font-semibold">{{ section.settings.heading }}</div>
+        <div class="tw:text-base!">{{ section.settings.description }}</div>
+      </div>
+      <div class="tw:md:flex tw:hidden tw:items-center tw:md:justify-end">
+        {% if section.settings.button_label != blank %}
+          <a
+            href="{{ section.settings.button_url }}"
+            class="button button-secondary tw:rounded-3xl"
+            style="--button-padding-block: 12px;"
+          >
+            {{ section.settings.button_label }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="tw:w-full tw:flex tw:flex-col tw:gap-10">
+      <div class="swiper product-collection-slider tw:w-full tw:max-w-full tw:md:overflow-hidden! tw:overflow-visible!">
+        <div class="swiper-wrapper">
+          {% assign collections = section.settings.collections %}
+          {% if collections != blank %}
+            {% for collection in collections %}
+              <div class="swiper-slide">
+                <a
+                  href="{{ collection.url }}"
+                  class="tw:block tw:rounded-xl tw:overflow-hidden collection-slide-link tw:relative tw:group"
+                >
+                  {% if collection.featured_image != blank %}
+                    {{
+                      collection.featured_image
+                      | image_url: width: 1200
+                      | image_tag:
+                        width: 1200,
+                        height: 1200,
+                        alt: collection.title,
+                        class: 'tw:w-full tw:h-full! tw:object-cover tw:object-center tw:transition-transform tw:duration-1000 tw:ease-in-out tw:group-hover:scale-105'
+                    }}
+                  {% endif %}
+                  <p class="tw:absolute tw:bottom-3.5 tw:left-3.5 tw:right-3.5 tw:bg-white/80 tw:text-black tw:py-4 tw:md:px-5 tw:px-4 tw:rounded-xl tw:backdrop-blur-sm tw:md:text-2xl tw:text-xl  tw:capitalize tw:italic">
+                    <em>{{ collection.title }}</em>
+                  </p>
+                </a>
+              </div>
+            {% endfor %}
+          {% else %}
+            {% for i in (1..5) %}
+              <div class="swiper-slide">
+                <div class="tw:block tw:rounded-xl tw:overflow-hidden tw:border tw:border-slate-200">
+                  {{ 'collection-' | append: i | placeholder_svg_tag: 'tw:w-full tw:object-cover' }}
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="product-pagination-section tw:flex tw:items-center tw:justify-between tw:gap-6">
+        <div class="swiper-scrollbar tw:static!"></div>
+        <div class="product-navigation tw:flex tw:items-center tw:gap-2">
+          <div
+            class="tw:cursor-pointer tw:w-8 tw:h-8 tw:transition-opacity tw:duration-300 tw:ease-in-out"
+            data-product-collection="prev"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 40 40" fill="none">
+              <g clip-path="url(#clip0_32_5)">
+              <path d="M0.625 20C0.625 9.29948 9.29948 0.625 20 0.625C30.7005 0.625 39.375 9.29948 39.375 20C39.375 30.7005 30.7005 39.375 20 39.375C9.29948 39.375 0.625 30.7005 0.625 20Z" stroke="black" stroke-width="1.25"/>
+              <path d="M21.5 25.5L16 20L21.5 14.5" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_32_5">
+              <rect width="40" height="40" fill="white"/>
+              </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <div
+            class="tw:cursor-pointer tw:w-8 tw:h-8 tw:transition-opacity tw:duration-300 tw:ease-in-out"
+            data-product-collection="next"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 40 40" fill="none">
+              <g clip-path="url(#clip0_32_9)">
+              <path d="M39.375 20C39.375 9.29948 30.7005 0.625 20 0.625C9.29948 0.625 0.625 9.29948 0.625 20C0.625 30.7005 9.29948 39.375 20 39.375C30.7005 39.375 39.375 30.7005 39.375 20Z" stroke="black" stroke-width="1.25"/>
+              <path d="M18.5 25.5L24 20L18.5 14.5" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_32_9">
+              <rect width="40" height="40" fill="white"/>
+              </clipPath>
+              </defs>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Slider",
+  "tag": "section",
+  "class": "product-slider-section",
+  "settings": [
+    {
+      "type": "collection_list",
+      "id": "collections",
+      "label": "Collections"
+    },
+    {
+      "type": "header",
+      "content": "Image Height"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Desktop Image Height",
+      "min": 200,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_height",
+      "label": "Mobile Image Height",
+      "min": 150,
+      "max": 600,
+      "step": 50,
+      "unit": "px",
+      "default": 250
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<h2>Shop Our Collection</h2>"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Discover our latest products.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop Collection"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Collection Slider"
+    }
+  ]
+}
+{% endschema %}
