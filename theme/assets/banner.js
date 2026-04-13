@@ -9,6 +9,10 @@ function createBannerSlider(startIndex = 0) {
     fadeEffect: {
       crossFade: true,
     },
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
   });
   slider.init();
   return slider;

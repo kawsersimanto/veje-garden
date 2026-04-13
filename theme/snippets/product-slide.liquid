@@ -1,0 +1,22 @@
+<div class="swiper-slide">
+  <a
+    href="{{ product.url }}"
+    class="tw:block tw:rounded-xl tw:overflow-hidden tw:relative tw:group"
+  >
+    {% if product.featured_image != blank %}
+      {{
+        product.featured_image
+        | image_url: width: 800
+        | image_tag:
+          width: 800,
+          height: 800,
+          alt: product.title,
+          class: 'tw:w-full tw:h-full! tw:object-cover tw:object-center tw:transition-transform tw:duration-1000 tw:ease-in-out tw:group-hover:scale-105'
+      }}
+    {% endif %}
+    <div class="tw:absolute tw:bottom-3.5 tw:left-3.5 tw:right-3.5 tw:bg-white/80 tw:text-black tw:py-4 tw:md:px-5 tw:px-4 tw:rounded-xl tw:backdrop-blur-sm">
+      <p class="tw:md:text-xl tw:text-lg tw:font-medium">{{ product.title }}</p>
+      <p class="tw:text-sm tw:text-slate-600 tw:mt-1">{{ product.price | money }}</p>
+    </div>
+  </a>
+</div>

@@ -13,7 +13,7 @@ function createProductCollectionSlider(startIndex = 0) {
     },
 
     scrollbar: {
-      el: ".swiper-scrollbar",
+      el: "[data-product-collection-scrollbar]",
     },
     breakpoints: {
       1200: {

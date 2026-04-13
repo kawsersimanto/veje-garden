@@ -1,8 +1,49 @@
+{{ 'product-slider.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-slider.js' | asset_url }}" defer></script>
+
+{% assign collections = section.settings.collections %}
+
 <div class="section section--page-width tw:md:pb-12 tw:md:pt-15 tw:py-8 tw:overflow-hidden">
   <div class="tw:flex tw:flex-col tw:md:gap-8 tw:gap-8">
-    <div class="tw:grid tw:md:grid-cols-2 tw:grid-cols-1 tw:gap-6">
+    <div class="tw:flex tw:md:flex-row tw:flex-col tw:gap-6 tw:md:items-center tw:justify-between">
       <div class="tw:flex tw:flex-col tw:gap-2">
-        <div class="tw:text-3xl! tw:font-semibold">{{ section.settings.heading }}</div>
+        <div class="tw:flex tw:md:items-center tw:items-start tw:md:flex-row tw:flex-col tw:gap-4">
+          <div class="tw:text-3xl! tw:font-semibold">
+            {{ section.settings.heading }}
+          </div>
+          {% if collections != blank and collections.count > 1 %}
+            <div>
+              {% if collections != blank and collections.count > 1 %}
+                <collection-select class="collection-select" data-section-id="{{ section.id }}">
+                  <div class="collection-select__trigger">
+                    <span class="collection-select__selected">
+                      {{ collections | first | map: 'title' | first }}
+                    </span>
+                    <svg
+                      class="collection-select__arrow"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 12"
+                    >
+                      <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" fill="none"/>
+                    </svg>
+                  </div>
+                  <ul class="collection-select__options">
+                    {% for collection in collections %}
+                      <li
+                        class="collection-select__option {% if forloop.first %}is-selected{% endif %}"
+                        data-value="{{ collection.id }}"
+                      >
+                        {{ collection.title }}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </collection-select>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
         <div class="tw:text-base!">{{ section.settings.description }}</div>
       </div>
       <div class="tw:md:flex tw:hidden tw:items-center tw:md:justify-end">
@@ -19,77 +60,54 @@
     </div>
 
     <div class="tw:w-full tw:flex tw:flex-col tw:gap-10">
-      <div class="swiper product-collection-slider tw:w-full tw:max-w-full tw:md:overflow-hidden! tw:overflow-visible!">
-        <div class="swiper-wrapper">
+      <div
+        class="swiper product-slider tw:w-full tw:max-w-full tw:md:overflow-hidden! tw:overflow-visible!"
+        data-section-id="{{ section.id }}"
+      >
+        <div class="swiper-wrapper" id="swiper-wrapper-{{ section.id }}">
           {% assign collections = section.settings.collections %}
           {% if collections != blank %}
-            {% for collection in collections %}
-              <div class="swiper-slide">
-                <a
-                  href="{{ collection.url }}"
-                  class="tw:block tw:rounded-xl tw:overflow-hidden collection-slide-link tw:relative tw:group"
-                >
-                  {% if collection.featured_image != blank %}
-                    {{
-                      collection.featured_image
-                      | image_url: width: 1200
-                      | image_tag:
-                        width: 1200,
-                        height: 1200,
-                        alt: collection.title,
-                        class: 'tw:w-full tw:h-full! tw:object-cover tw:object-center tw:transition-transform tw:duration-1000 tw:ease-in-out tw:group-hover:scale-105'
-                    }}
-                  {% endif %}
-                  <p class="tw:absolute tw:bottom-3.5 tw:left-3.5 tw:right-3.5 tw:bg-white/80 tw:text-black tw:py-4 tw:md:px-5 tw:px-4 tw:rounded-xl tw:backdrop-blur-sm tw:md:text-2xl tw:text-xl  tw:capitalize tw:italic">
-                    <em>{{ collection.title }}</em>
-                  </p>
-                </a>
-              </div>
+            {% assign first_collection = collections | first %}
+            {% for product in first_collection.products limit: section.settings.products_per_collection %}
+              {% render 'product-slide', product: product %}
             {% endfor %}
           {% else %}
             {% for i in (1..5) %}
               <div class="swiper-slide">
                 <div class="tw:block tw:rounded-xl tw:overflow-hidden tw:border tw:border-slate-200">
-                  {{ 'collection-' | append: i | placeholder_svg_tag: 'tw:w-full tw:object-cover' }}
+                  {{ 'product-' | append: i | placeholder_svg_tag: 'tw:w-full tw:object-cover' }}
                 </div>
               </div>
             {% endfor %}
           {% endif %}
         </div>
       </div>
+
       <div class="product-pagination-section tw:flex tw:items-center tw:justify-between tw:gap-6">
-        <div class="swiper-scrollbar tw:static!"></div>
+        <div class="swiper-scrollbar tw:static! tw:z-0!" data-product-scrollbar></div>
         <div class="product-navigation tw:flex tw:items-center tw:gap-2">
           <div
             class="tw:cursor-pointer tw:w-8 tw:h-8 tw:transition-opacity tw:duration-300 tw:ease-in-out"
-            data-product-collection="prev"
+            data-product="prev"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 40 40" fill="none">
               <g clip-path="url(#clip0_32_5)">
               <path d="M0.625 20C0.625 9.29948 9.29948 0.625 20 0.625C30.7005 0.625 39.375 9.29948 39.375 20C39.375 30.7005 30.7005 39.375 20 39.375C9.29948 39.375 0.625 30.7005 0.625 20Z" stroke="black" stroke-width="1.25"/>
               <path d="M21.5 25.5L16 20L21.5 14.5" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
               </g>
-              <defs>
-              <clipPath id="clip0_32_5">
-              <rect width="40" height="40" fill="white"/>
-              </clipPath>
-              </defs>
+              <defs><clipPath id="clip0_32_5"><rect width="40" height="40" fill="white"/></clipPath></defs>
             </svg>
           </div>
           <div
             class="tw:cursor-pointer tw:w-8 tw:h-8 tw:transition-opacity tw:duration-300 tw:ease-in-out"
-            data-product-collection="next"
+            data-product="next"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 40 40" fill="none">
               <g clip-path="url(#clip0_32_9)">
               <path d="M39.375 20C39.375 9.29948 30.7005 0.625 20 0.625C9.29948 0.625 0.625 9.29948 0.625 20C0.625 30.7005 9.29948 39.375 20 39.375C30.7005 39.375 39.375 30.7005 39.375 20Z" stroke="black" stroke-width="1.25"/>
               <path d="M18.5 25.5L24 20L18.5 14.5" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
               </g>
-              <defs>
-              <clipPath id="clip0_32_9">
-              <rect width="40" height="40" fill="white"/>
-              </clipPath>
-              </defs>
+              <defs><clipPath id="clip0_32_9"><rect width="40" height="40" fill="white"/></clipPath></defs>
             </svg>
           </div>
         </div>
@@ -97,6 +115,20 @@
     </div>
   </div>
 </div>
+
+{% assign collections = section.settings.collections %}
+{% if collections != blank %}
+  {% for collection in collections %}
+    <template
+      data-collection-id="{{ collection.id }}"
+      data-section-id="{{ section.id }}"
+    >
+      {% for product in collection.products limit: section.settings.products_per_collection %}
+        {% render 'product-slide', product: product %}
+      {% endfor %}
+    </template>
+  {% endfor %}
+{% endif %}
 
 {% schema %}
 {
@@ -108,6 +140,15 @@
       "type": "collection_list",
       "id": "collections",
       "label": "Collections"
+    },
+    {
+      "type": "range",
+      "id": "products_per_collection",
+      "label": "Products per Collection",
+      "min": 2,
+      "max": 20,
+      "step": 1,
+      "default": 8
     },
     {
       "type": "header",
@@ -163,7 +204,7 @@
   ],
   "presets": [
     {
-      "name": "Product Collection Slider"
+      "name": "Product Slider"
     }
   ]
 }
