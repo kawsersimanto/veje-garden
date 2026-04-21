@@ -13,34 +13,32 @@
           </div>
           {% if collections != blank and collections.count > 1 %}
             <div>
-              {% if collections != blank and collections.count > 1 %}
-                <collection-select class="collection-select" data-section-id="{{ section.id }}">
-                  <div class="collection-select__trigger">
-                    <span class="collection-select__selected">
-                      {{ collections | first | map: 'title' | first }}
-                    </span>
-                    <svg
-                      class="collection-select__arrow"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="12"
-                      height="12"
-                      viewBox="0 0 12 12"
+              <collection-select class="collection-select" data-section-id="{{ section.id }}">
+                <div class="collection-select__trigger">
+                  <span class="collection-select__selected">
+                    {{ collections | first | map: 'title' | first }}
+                  </span>
+                  <svg
+                    class="collection-select__arrow"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                  >
+                    <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" fill="none"/>
+                  </svg>
+                </div>
+                <ul class="collection-select__options">
+                  {% for collection in collections %}
+                    <li
+                      class="collection-select__option {% if forloop.first %}is-selected{% endif %}"
+                      data-value="{{ collection.id }}"
                     >
-                      <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" fill="none"/>
-                    </svg>
-                  </div>
-                  <ul class="collection-select__options">
-                    {% for collection in collections %}
-                      <li
-                        class="collection-select__option {% if forloop.first %}is-selected{% endif %}"
-                        data-value="{{ collection.id }}"
-                      >
-                        {{ collection.title }}
-                      </li>
-                    {% endfor %}
-                  </ul>
-                </collection-select>
-              {% endif %}
+                      {{ collection.title }}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </collection-select>
             </div>
           {% endif %}
         </div>
@@ -65,18 +63,21 @@
         data-section-id="{{ section.id }}"
       >
         <div class="swiper-wrapper" id="swiper-wrapper-{{ section.id }}">
-          {% assign collections = section.settings.collections %}
           {% if collections != blank %}
             {% assign first_collection = collections | first %}
             {% for product in first_collection.products limit: section.settings.products_per_collection %}
-              {% render 'product-slide', product: product %}
+              <div class="swiper-slide">
+                {% # theme-check-disable UniqueStaticBlockId %}
+                {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
+                {% # theme-check-enable UniqueStaticBlockId %}
+              </div>
             {% endfor %}
           {% else %}
             {% for i in (1..5) %}
               <div class="swiper-slide">
-                <div class="tw:block tw:rounded-xl tw:overflow-hidden tw:border tw:border-slate-200">
-                  {{ 'product-' | append: i | placeholder_svg_tag: 'tw:w-full tw:object-cover' }}
-                </div>
+                {% # theme-check-disable UniqueStaticBlockId %}
+                {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: null %}
+                {% # theme-check-enable UniqueStaticBlockId %}
               </div>
             {% endfor %}
           {% endif %}
@@ -116,7 +117,6 @@
   </div>
 </div>
 
-{% assign collections = section.settings.collections %}
 {% if collections != blank %}
   {% for collection in collections %}
     <template
@@ -124,7 +124,11 @@
       data-section-id="{{ section.id }}"
     >
       {% for product in collection.products limit: section.settings.products_per_collection %}
-        {% render 'product-slide', product: product %}
+        <div class="swiper-slide">
+          {% # theme-check-disable UniqueStaticBlockId %}
+          {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
+          {% # theme-check-enable UniqueStaticBlockId %}
+        </div>
       {% endfor %}
     </template>
   {% endfor %}
@@ -135,6 +139,11 @@
   "name": "Product Slider",
   "tag": "section",
   "class": "product-slider-section",
+  "blocks": [
+    {
+      "type": "_product-card"
+    }
+  ],
   "settings": [
     {
       "type": "collection_list",
@@ -204,7 +213,88 @@
   ],
   "presets": [
     {
-      "name": "Product Slider"
+      "name": "Product Slider",
+      "blocks": {
+        "static-product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product-card-gallery": {
+              "type": "_product-card-gallery",
+              "name": "Product Media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "product_title": {
+              "type": "product-title",
+              "settings": {
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "price": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            }
+          },
+          "block_order": ["product-card-gallery", "product_title", "price"]
+        }
+      }
     }
   ]
 }
