@@ -1,22 +1,47 @@
-
-
 {%- doc -%}
   This block is used to display the add to cart button.
   Intended for product-form.liquid block.
 
   @param {string} can_add_to_cart - Whether the product can be added to the cart
   @param {string} add_to_cart_text - The text of the add to cart button
+  @param {number} font_size - Font size in px passed from parent buy-buttons block
+  @param {string} font_weight - Font weight passed from parent buy-buttons block
+  @param {string} text_case - Text transform value passed from parent buy-buttons block
+  @param {string} icon_visibility - Whether icon is visible or hidden
+  @param {object} custom_icon - Custom icon image object passed from parent buy-buttons block
 {%- enddoc -%}
 
 {% liquid
   assign class = 'add-to-cart-button ' | append: block.settings.style_class
   assign id = 'BuyButtons-ProductSubmitButton-' | append: block.id
+
+  assign btn_font_size = font_size | default: 16 | append: 'px'
+  assign btn_font_weight = font_weight | default: '600'
+  assign btn_text_case = text_case | default: 'none'
+  assign btn_icon_hidden = false
+  if icon_visibility == 'hidden'
+    assign btn_icon_hidden = true
+  endif
 %}
 
 <span
   {{ block.shopify_attributes }}
-  style="--add-to-cart-font-case: {{ settings.button_text_case }};"
+  style="
+    --add-to-cart-font-size: {{ btn_font_size }};
+    --add-to-cart-font-weight: {{ btn_font_weight }};
+    --add-to-cart-font-case: {{ btn_text_case }};
+    {% if btn_icon_hidden %}--add-to-cart-icon-display: none;{% endif %}
+  "
 >
+  {% if custom_icon and btn_icon_hidden == false %}
+    <style>
+      .add-to-cart-button--{{ block.id }} .svg-wrapper,
+      .add-to-cart-button--{{ block.id }} svg {
+        display: none;
+      }
+    </style>
+  {% endif %}
+
   {% render 'add-to-cart-button',
     id: id,
     class: class,
@@ -25,7 +50,42 @@
     add_to_cart_text: add_to_cart_text,
     data_testid: 'standalone-add-to-cart'
   %}
+
+  {% if custom_icon and btn_icon_hidden == false %}
+    <span class="add-to-cart-custom-icon">
+      {{ custom_icon | image_url: width: 24, height: 24 | image_tag: alt: '', class: 'add-to-cart-custom-icon__img' }}
+    </span>
+  {% endif %}
 </span>
+
+<style>
+  .add-to-cart-button {
+    font-size: var(--add-to-cart-font-size, 16px);
+    font-weight: var(--add-to-cart-font-weight, 600);
+    text-transform: var(--add-to-cart-font-case, none);
+  }
+
+  .add-to-cart-button svg,
+  .add-to-cart-button .svg-wrapper {
+    display: var(--add-to-cart-icon-display, inline-flex);
+  }
+
+  .add-to-cart-custom-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .add-to-cart-custom-icon__img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+</style>
 
 {% schema %}
 {
