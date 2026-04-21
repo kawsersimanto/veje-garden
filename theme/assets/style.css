@@ -8,9 +8,12 @@
     --tw-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --tw-color-slate-200: oklch(92.9% 0.013 255.508);
+    --tw-color-slate-600: oklch(44.6% 0.043 257.281);
     --tw-color-black: #000;
     --tw-color-white: #fff;
     --tw-spacing: 0.25rem;
+    --tw-text-sm: 0.875rem;
+    --tw-text-sm--line-height: calc(1.25 / 0.875);
     --tw-text-base: 1rem;
     --tw-text-base--line-height: calc(1.5 / 1);
     --tw-text-lg: 1.125rem;
@@ -208,6 +211,12 @@
   .tw\:left-3\.5 {
     left: calc(var(--tw-spacing) * 3.5);
   }
+  .tw\:z-0\! {
+    z-index: 0 !important;
+  }
+  .tw\:mt-1 {
+    margin-top: calc(var(--tw-spacing) * 1);
+  }
   .tw\:block {
     display: block;
   }
@@ -379,9 +388,17 @@
     font-size: var(--tw-text-lg) !important;
     line-height: var(--tw-leading, var(--tw-text-lg--line-height)) !important;
   }
+  .tw\:text-sm {
+    font-size: var(--tw-text-sm);
+    line-height: var(--tw-leading, var(--tw-text-sm--line-height));
+  }
   .tw\:text-xl {
     font-size: var(--tw-text-xl);
     line-height: var(--tw-leading, var(--tw-text-xl--line-height));
+  }
+  .tw\:font-medium {
+    --tw-font-weight: var(--tw-font-weight-medium);
+    font-weight: var(--tw-font-weight-medium);
   }
   .tw\:font-medium\! {
     --tw-font-weight: var(--tw-font-weight-medium) !important;
@@ -393,6 +410,9 @@
   }
   .tw\:text-black {
     color: var(--tw-color-black);
+  }
+  .tw\:text-slate-600 {
+    color: var(--tw-color-slate-600);
   }
   .tw\:capitalize {
     text-transform: capitalize;
@@ -477,6 +497,11 @@
       flex-direction: row;
     }
   }
+  .tw\:md\:items-center {
+    @media (width >= 48rem) {
+      align-items: center;
+    }
+  }
   .tw\:md\:justify-center {
     @media (width >= 48rem) {
       justify-content: center;
@@ -537,6 +562,12 @@
     @media (width >= 48rem) {
       font-size: var(--tw-text-6xl) !important;
       line-height: var(--tw-leading, var(--tw-text-6xl--line-height)) !important;
+    }
+  }
+  .tw\:md\:text-xl {
+    @media (width >= 48rem) {
+      font-size: var(--tw-text-xl);
+      line-height: var(--tw-leading, var(--tw-text-xl--line-height));
     }
   }
 }
