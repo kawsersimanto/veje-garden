@@ -61,6 +61,8 @@
       <div
         class="swiper product-slider tw:w-full tw:max-w-full tw:md:overflow-hidden! tw:overflow-visible!"
         data-section-id="{{ section.id }}"
+        data-space-between="{{ section.settings.space_between_mobile }}"
+        data-space-between-desktop="{{ section.settings.space_between_desktop }}"
       >
         <div class="swiper-wrapper" id="swiper-wrapper-{{ section.id }}">
           {% if collections != blank %}
@@ -209,6 +211,30 @@
       "type": "url",
       "id": "button_url",
       "label": "Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Slider"
+    },
+    {
+      "type": "range",
+      "id": "space_between_mobile",
+      "label": "Space Between (Mobile)",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "space_between_desktop",
+      "label": "Space Between (Desktop)",
+      "min": 0,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "default": 16
     }
   ],
   "presets": [

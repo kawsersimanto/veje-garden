@@ -55,23 +55,32 @@ function getSectionId() {
 
 let productSlider = null;
 
-function createProductSlider(startIndex = 0) {
-  const slider = new Swiper(".product-slider", {
+function createProductSlider(sectionEl, startIndex = 0) {
+  const sliderEl = sectionEl.querySelector(".product-slider");
+  if (!sliderEl) return null;
+
+  const spaceBetween = parseInt(sliderEl.dataset.spaceBetween ?? 16);
+  const spaceBetweenDesktop = parseInt(
+    sliderEl.dataset.spaceBetweenDesktop ?? 16,
+  );
+
+  const slider = new Swiper(sliderEl, {
+    // pass the element, not a string
     init: false,
     initialSlide: startIndex,
     slidesPerView: 1.5,
-    spaceBetween: 16,
+    spaceBetween,
     speed: 900,
     navigation: {
-      nextEl: `[data-product="next"]`,
-      prevEl: `[data-product="prev"]`,
+      nextEl: sectionEl.querySelector('[data-product="next"]'),
+      prevEl: sectionEl.querySelector('[data-product="prev"]'),
     },
     scrollbar: {
-      el: "[data-product-scrollbar]",
+      el: sectionEl.querySelector("[data-product-scrollbar]"),
     },
     breakpoints: {
-      1200: { slidesPerView: 4.5 },
-      768: { slidesPerView: 2.5 },
+      1200: { slidesPerView: 4, spaceBetween: spaceBetweenDesktop },
+      768: { slidesPerView: 2.5, spaceBetween: spaceBetweenDesktop },
     },
   });
 
@@ -79,64 +88,78 @@ function createProductSlider(startIndex = 0) {
   return slider;
 }
 
-function destroySlider() {
-  if (productSlider && !productSlider.destroyed) {
-    productSlider.destroy(true, true);
-  }
-  productSlider = null;
+function destroySlider(slider) {
+  if (slider && !slider.destroyed) slider.destroy(true, true);
+  return null;
 }
 
-// ─── Collection filtering ────────────────────────────────────────────────────
-
-function filterByCollection(collectionId, sectionId) {
-  const wrapper = document.getElementById(`swiper-wrapper-${sectionId}`);
-  const template = document.querySelector(
-    `template[data-collection-id="${collectionId}"][data-section-id="${sectionId}"]`,
+function filterByCollection(collectionId, sectionId, sectionEl, slider) {
+  const wrapper = sectionEl.querySelector(`#swiper-wrapper-${sectionId}`);
+  const template = sectionEl.querySelector(
+    `template[data-collection-id="${collectionId}"]`,
   );
 
-  if (!wrapper || !template) return;
+  if (!wrapper || !template) return slider;
 
-  destroySlider();
+  slider = destroySlider(slider);
   wrapper.innerHTML = "";
   wrapper.appendChild(template.content.cloneNode(true));
-  productSlider = createProductSlider(0);
+  return createProductSlider(sectionEl, 0);
 }
 
-let filterAbortController = new AbortController();
+function initSection(sectionEl) {
+  let slider = createProductSlider(sectionEl);
+  const sectionId =
+    sectionEl.querySelector("collection-select")?.dataset.sectionId;
+  const abortController = new AbortController();
 
-function initCollectionFilter(sectionId) {
-  filterAbortController.abort();
-  filterAbortController = new AbortController();
-
-  document.addEventListener(
+  sectionEl.addEventListener(
     "collection:change",
     (e) => {
-      if (e.detail.sectionId !== sectionId) return;
-      filterByCollection(e.detail.collectionId, e.detail.sectionId);
+      slider = filterByCollection(
+        e.detail.collectionId,
+        e.detail.sectionId,
+        sectionEl,
+        slider,
+      );
     },
-    { signal: filterAbortController.signal },
+    { signal: abortController.signal },
   );
+
+  return { slider, abortController };
 }
 
-// ─── Init ────────────────────────────────────────────────────────────────────
+// ─── Init all sections on page load ─────────────────────────────────────────
 
-productSlider = createProductSlider();
-initCollectionFilter(getSectionId());
+const sectionInstances = new Map();
+
+document.querySelectorAll(".product-slider-section").forEach((sectionEl) => {
+  sectionInstances.set(sectionEl, initSection(sectionEl));
+});
 
 // ─── Shopify editor events ───────────────────────────────────────────────────
 
 document.addEventListener("shopify:block:select", (event) => {
+  const sectionEl = event.target.closest(".product-slider-section");
+  const instance = sectionInstances.get(sectionEl);
   const index = parseInt(event.target.dataset.index);
-  productSlider?.slideTo(index);
+  instance?.slider?.slideTo(index);
 });
 
-document.addEventListener("shopify:section:load", () => {
-  destroySlider();
-  productSlider = createProductSlider(0);
-  initCollectionFilter(getSectionId());
+document.addEventListener("shopify:section:load", (event) => {
+  const sectionEl = event.target.querySelector(".product-slider-section");
+  if (!sectionEl) return;
+  const instance = sectionInstances.get(sectionEl);
+  instance?.abortController.abort();
+  instance?.slider && destroySlider(instance.slider);
+  sectionInstances.set(sectionEl, initSection(sectionEl));
 });
 
-document.addEventListener("shopify:section:unload", () => {
-  destroySlider();
-  filterAbortController.abort();
+document.addEventListener("shopify:section:unload", (event) => {
+  const sectionEl = event.target.querySelector(".product-slider-section");
+  if (!sectionEl) return;
+  const instance = sectionInstances.get(sectionEl);
+  instance?.abortController.abort();
+  destroySlider(instance?.slider);
+  sectionInstances.delete(sectionEl);
 });
