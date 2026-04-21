@@ -468,7 +468,12 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "add_to_cart_button_text": "Shop Now",
+                "button_font_size": 16,
+                "button_font_weight": "500",
+                "button_text_case": "uppercase",
+                "button_icon_visibility": "hidden"
               },
               "blocks": {
                 "quantity": {
