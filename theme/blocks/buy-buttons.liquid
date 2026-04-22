@@ -34,8 +34,40 @@
   endif
 %}
 
+{%- liquid
+  if block_settings['margin-block-start-auto']
+    assign margin_block_start = 'auto'
+  else
+    assign margin_block_start = block_settings['margin-block-start'] | append: 'px'
+  endif
+
+  if block_settings['margin-block-end-auto']
+    assign margin_block_end = 'auto'
+  else
+    assign margin_block_end = block_settings['margin-block-end'] | append: 'px'
+  endif
+
+  if block_settings['margin-inline-start-auto']
+    assign margin_inline_start = 'auto'
+  else
+    assign margin_inline_start = block_settings['margin-inline-start'] | append: 'px'
+  endif
+
+  if block_settings['margin-inline-end-auto']
+    assign margin_inline_end = 'auto'
+  else
+    assign margin_inline_end = block_settings['margin-inline-end'] | append: 'px'
+  endif
+-%}
+
 <span
   class="buy-buttons-block buy-buttons-block--{{ block.id }}"
+  style="
+    margin-block-start: {{ margin_block_start }};
+    margin-block-end: {{ margin_block_end }};
+    margin-inline-start: {{ margin_inline_start }};
+    margin-inline-end: {{ margin_inline_end }};
+  "
   {{ block.shopify_attributes }}
 >
   {%- if product != blank -%}
@@ -445,6 +477,78 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Margin"
+    },
+    {
+      "type": "checkbox",
+      "id": "margin-block-start-auto",
+      "label": "Top Auto",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "margin-block-start",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.margin-block-start-auto == false }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "margin-block-end-auto",
+      "label": "Bottom Auto",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "margin-block-end",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.margin-block-end-auto == false }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "margin-inline-start-auto",
+      "label": "Left Auto",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "margin-inline-start",
+      "label": "Left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.margin-inline-start-auto == false }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "margin-inline-end-auto",
+      "label": "Right Auto",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "margin-inline-end",
+      "label": "Right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.margin-inline-end-auto == false }}"
     },
     {
       "type": "header",
