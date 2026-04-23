@@ -204,7 +204,7 @@
             },
             "group_MmVXFL": {
               "type": "group",
-              "name": "t:names.group",
+              "name": "Accordion",
               "settings": {
                 "content_direction": "column",
                 "vertical_on_mobile": true,
@@ -265,7 +265,7 @@
                       "type": "_accordion-row",
                       "settings": {
                         "heading": "Description",
-                        "open_by_default": true,
+                        "open_by_default": false,
                         "icon": "none",
                         "width": 20
                       },
