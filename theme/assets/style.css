@@ -482,6 +482,11 @@
       display: grid !important;
     }
   }
+  .tw\:md\:hidden {
+    @media (width >= 48rem) {
+      display: none;
+    }
+  }
   .tw\:md\:h-160 {
     @media (width >= 48rem) {
       height: calc(var(--tw-spacing) * 160);
