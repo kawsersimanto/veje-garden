@@ -673,7 +673,7 @@
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
+            "gap": 32,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -684,7 +684,7 @@
             "color_scheme": "",
             "background_media": "image",
             "video_position": "cover",
-            "background_image": "shopify://shop_images/Gemini_Generated_Image_5uvhrn5uvhrn5uvh.png",
+            "background_image": "shopify://shop_images/Untitled_design_7_1.png",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
@@ -697,10 +697,10 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "padding-block-start": 32,
-            "padding-block-end": 32,
-            "padding-inline-start": 16,
-            "padding-inline-end": 16
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {
             "group_C6AmkT": {
@@ -737,10 +737,10 @@
                 "link": "",
                 "open_in_new_tab": false,
                 "placeholder": "",
-                "padding-block-start": 0,
+                "padding-block-start": 24,
                 "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-start": 16,
+                "padding-inline-end": 16
               },
               "blocks": {
                 "text_CxDig7": {
@@ -752,7 +752,7 @@
                     "max_width": "normal",
                     "alignment": "left",
                     "type_preset": "custom",
-                    "font": "var(--font-body--family)",
+                    "font": "var(--font-heading--family)",
                     "font_size": "0.875rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
@@ -888,6 +888,7 @@
                   "type": "image",
                   "name": "t:names.image",
                   "settings": {
+                    "image": "shopify://shop_images/Untitled_design_9_1_1.png",
                     "link": "",
                     "image_ratio": "adapt",
                     "width": "fill",
