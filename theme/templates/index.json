@@ -47,28 +47,28 @@
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/Group_5.svg",
-            "text": "OB/GYN Developed"
+            "text": "<p><strong>OB/GYN Developed</strong></p>"
           }
         },
         "item_xEQJGg": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/Group_6_2.svg",
-            "text": "Clinically Studied"
+            "text": "<p><strong>Clinically Studied</strong></p>"
           }
         },
         "item_PCX3hp": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/Group_13.svg",
-            "text": "No Sugar"
+            "text": "<p><strong>No Sugar</strong></p>"
           }
         },
         "item_6yE8XR": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/Group_14.svg",
-            "text": "Traceable Ingridients"
+            "text": "<p><strong>Traceable Ingridients</strong></p>"
           }
         }
       },
@@ -85,14 +85,22 @@
         "color_scheme": "",
         "padding-block-start": 24,
         "padding-block-end": 24,
-        "gap_between_elements": 24,
         "mobile-padding-block-start": 0,
-        "mobile-padding-block-end": 0
+        "mobile-padding-block-end": 0,
+        "gap_between_elements": 24,
+        "item_inner_gap": 8,
+        "mobile_gap_between_elements": 16,
+        "mobile_item_inner_gap": 8,
+        "image_size": "32px",
+        "image_height": "32px",
+        "mobile_image_size": "24px",
+        "mobile_image_height": "24px",
+        "image_object_fit": "contain"
       }
     },
     "collection_slider_LEKKee": {
       "type": "collection-slider",
-      "name": "Product Collection Slider",
+      "name": "Collections",
       "settings": {
         "collections": [
           "mens-health",
@@ -952,6 +960,56 @@
         "padding-block-start": 60,
         "padding-block-end": 60
       }
+    },
+    "features_marquee_7tTXKg": {
+      "type": "features-marquee",
+      "blocks": {
+        "item_MgbiiX": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2025-12-05_at_7.20.44_PM_1.avif",
+            "text": "<h5><strong>Skincare Award Winner</strong></h5><p>2024 – 2025</p>"
+          }
+        },
+        "item_npDULt": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/image_205.png",
+            "text": "<h5><strong>Skincare Award Winner</strong></h5><p>2024 – 2025</p>"
+          }
+        },
+        "item_6FTYcY": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2025-12-05_at_7.14.21_PM_1.avif",
+            "text": "<h5><strong>Skincare Award Winner</strong></h5><p>2024 – 2025</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_MgbiiX",
+        "item_npDULt",
+        "item_6FTYcY"
+      ],
+      "name": "Features Marquee",
+      "settings": {
+        "feature_title": "",
+        "movement_direction": "normal",
+        "color_scheme": "",
+        "padding-block-start": 24,
+        "padding-block-end": 24,
+        "mobile-padding-block-start": 0,
+        "mobile-padding-block-end": 0,
+        "gap_between_elements": 60,
+        "item_inner_gap": 12,
+        "mobile_gap_between_elements": 0,
+        "mobile_item_inner_gap": 8,
+        "image_size": "137px",
+        "image_height": "32px",
+        "mobile_image_size": "120px",
+        "mobile_image_height": "32px",
+        "image_object_fit": "contain"
+      }
     }
   },
   "order": [
@@ -960,6 +1018,7 @@
     "collection_slider_LEKKee",
     "product_slider_DWh6rr",
     "section_rBWiQ4",
-    "section_3Qz6zG"
+    "section_3Qz6zG",
+    "features_marquee_7tTXKg"
   ]
 }
